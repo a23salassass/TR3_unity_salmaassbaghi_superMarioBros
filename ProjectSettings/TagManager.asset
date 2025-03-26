@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Pipe
+  - Castle
   layers:
   - Default
   - TransparentFX
