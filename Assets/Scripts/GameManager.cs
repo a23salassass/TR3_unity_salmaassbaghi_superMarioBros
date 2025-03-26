@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public int stage { get; private set; } = 1;
     public int lives { get; private set; } = 3;
     public int coins { get; private set; } = 0;
-
+    
     private void Awake()
     {
         if (Instance != null) {
@@ -72,7 +72,9 @@ public class GameManager : MonoBehaviour
 
     public void AddCoin()
     {
+        Player player = FindObjectOfType<Player>();
         coins++;
+        
 
         if (coins == 100)
         {

@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\PowerUp.cs" />
     <Compile Include="Assets\Scripts\AnimatedSprite.cs" />
     <Compile Include="Assets\Scripts\EntityMovement.cs" />
+    <Compile Include="Assets\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\GoalZone.cs" />
     <Compile Include="Assets\Scripts\SideScrolling.cs" />
     <Compile Include="Assets\Scripts\LoginManager.cs" />
