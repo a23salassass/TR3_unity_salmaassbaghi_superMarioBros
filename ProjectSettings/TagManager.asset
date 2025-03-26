@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Ground
+  - Pipe
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - PowerUp
+  - Enemy
+  - Shell
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 3414342899
+    locked: 0
+  - name: Powerups
+    uniqueID: 1785120749
+    locked: 0
+  - name: Enemies
+    uniqueID: 2244170975
+    locked: 0
+  - name: Mario
+    uniqueID: 4084168905
+    locked: 0
+  - name: Pipes
+    uniqueID: 1744045039
+    locked: 0
+  - name: Blocks
+    uniqueID: 1258342355
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  m_RenderingLayers:
+  - Default
