@@ -2986,9 +2986,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2033196269}
     m_Modifications:
+    - target: {fileID: 259541467308826838, guid: 3cc94f2be96434b46ba71344aa303e06, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2245652052805658355, guid: 3cc94f2be96434b46ba71344aa303e06, type: 3}
       propertyPath: m_Name
       value: FlagPole
+      objectReference: {fileID: 0}
+    - target: {fileID: 2245652052805658355, guid: 3cc94f2be96434b46ba71344aa303e06, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339680284930843643, guid: 3cc94f2be96434b46ba71344aa303e06, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4561012762933789392, guid: 3cc94f2be96434b46ba71344aa303e06, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3029,6 +3041,10 @@ PrefabInstance:
     - target: {fileID: 4561012762933789392, guid: 3cc94f2be96434b46ba71344aa303e06, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6768071675952769979, guid: 3cc94f2be96434b46ba71344aa303e06, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11317,7 +11333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2033196269}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}

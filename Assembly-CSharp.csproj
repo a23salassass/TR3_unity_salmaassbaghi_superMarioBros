@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\BlockItem.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PowerUp.cs" />
+    <Compile Include="Assets\Scripts\LogSender.cs" />
     <Compile Include="Assets\Scripts\AnimatedSprite.cs" />
     <Compile Include="Assets\Scripts\EntityMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerStats.cs" />

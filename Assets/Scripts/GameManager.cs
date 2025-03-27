@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     public void NewGame()
     {
+        LogSender.SendLog("Un usuari inicia una partida");
+        Debug.Log("New Game, enviado a mongo");
         lives = 3;
         coins = 0;
 
@@ -37,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        LogSender.SendLog("Un usari ha perdut la partida.");
+        Debug.Log("Game Over, enviado a mongo");
         NewGame();
     }
 
@@ -46,11 +50,6 @@ public class GameManager : MonoBehaviour
         this.stage = stage;
 
         SceneManager.LoadScene($"{world}-{stage}");
-    }
-
-    public void NextLevel()
-    {
-        LoadLevel(world, stage + 1);
     }
 
     public void ResetLevel(float delay)
@@ -74,7 +73,8 @@ public class GameManager : MonoBehaviour
     {
         Player player = FindObjectOfType<Player>();
         coins++;
-        
+        LogSender.SendLog("Un jugador ha recollit una moneda.");
+        Debug.Log($"Monedas: {coins}, enviado a mongo");
 
         if (coins == 100)
         {
@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
 
     public void AddLife()
     {
+        LogSender.SendLog("Un jugador ha recollit una vida.");
+        Debug.Log("Add Life, enviado a mongo");
         lives++;
     }
 

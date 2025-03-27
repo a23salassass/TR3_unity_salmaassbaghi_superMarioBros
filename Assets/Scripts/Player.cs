@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         StartCoroutine(LoadStatsFromServer("http://localhost:4000/api/personatges/1"));
+        LogSender.SendLog("Un usuari ha iniciat el joc.");
+        Debug.log("Un usuari ha iniciat el joc enviat a MONGODB.");
     }
 
     private IEnumerator LoadStatsFromServer(string url)
@@ -38,7 +40,7 @@ public class Player : MonoBehaviour
                 PlayerStats stats = JsonUtility.FromJson<PlayerStats>(www.downloadHandler.text);
                 moveSpeed = stats.moveSpeed;
                 coinMultiplier = stats.coinMultiplier;
-                Debug.Log($"Stats cargados desde el servidor: speed={moveSpeed}, coinX{coinMultiplier}");
+                Debug.Log($"Stats cargats de l'API jiji: speed={moveSpeed}, coinX{coinMultiplier}");
             }
             else
             {
@@ -61,6 +63,8 @@ public class Player : MonoBehaviour
 
     public void Death()
     {
+        LogSender.SendLog("Un usuari ha mort.");
+        Debug.Log("Un usuari ha mort enviat a MONGODB.");
         smallRenderer.enabled = false;
         bigRenderer.enabled = false;
         deathAnimation.enabled = true;
@@ -74,6 +78,7 @@ public class Player : MonoBehaviour
 
     public void IncreaseSpeedTemporarily(float multiplier, float duration)
     {
+        
         PlayerController controller = GetComponent<PlayerController>();
         if (controller != null)
         {
