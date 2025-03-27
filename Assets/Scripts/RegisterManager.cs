@@ -53,6 +53,7 @@ public class Register : MonoBehaviour
             if (request.result == UnityWebRequest.Result.Success)
             {
                 Debug.Log("Registre exitós: " + request.downloadHandler.text);
+                LogSender.SendLog($"Un usuari s'ha registrat {username}.");
                 errorMessage.text = "Registre completat!";
                 errorMessage.color = Color.green;
                 

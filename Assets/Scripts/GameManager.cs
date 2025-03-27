@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         LogSender.SendLog("Un usari ha perdut la partida.");
         Debug.Log("Game Over, enviado a mongo");
-        NewGame();
+SceneManager.LoadScene("TheEnd");
     }
 
     public void LoadLevel(int world, int stage)

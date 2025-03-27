@@ -47,6 +47,7 @@ public class LoginManager : MonoBehaviour
             if (request.result == UnityWebRequest.Result.Success)
             {
                 Debug.Log("Login Successful: " + request.downloadHandler.text);
+                LogSender.SendLog($"Un usuari ha iniciat sessió {username}.");
                 
 
     StartCoroutine(LoadSceneAsync("1-1"));

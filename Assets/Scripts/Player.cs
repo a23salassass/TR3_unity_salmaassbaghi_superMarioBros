@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     {
         StartCoroutine(LoadStatsFromServer("http://localhost:4000/api/personatges/1"));
         LogSender.SendLog("Un usuari ha iniciat el joc.");
-        Debug.log("Un usuari ha iniciat el joc enviat a MONGODB.");
+        Debug.Log("Un usuari ha iniciat el joc enviat a MONGODB.");
     }
 
     private IEnumerator LoadStatsFromServer(string url)
