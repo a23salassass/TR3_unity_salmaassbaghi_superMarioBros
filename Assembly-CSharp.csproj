@@ -80,9 +80,11 @@
     <Compile Include="Assets\Scripts\GoalZone.cs" />
     <Compile Include="Assets\Scripts\SideScrolling.cs" />
     <Compile Include="Assets\Scripts\LoginManager.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement2.cs" />
     <Compile Include="Assets\Scripts\PlayerSpriteRender.cs" />
     <Compile Include="Assets\Scripts\Goomba.cs" />
     <Compile Include="Assets\Scripts\RegisterManager.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\EnemiAi.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\DeathBarrier.cs" />

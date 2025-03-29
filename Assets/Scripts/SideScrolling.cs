@@ -1,18 +1,18 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class SideScrolling : MonoBehaviour
 {
-    private Transform player;
+    [SerializeField] private Transform player1;
+    [SerializeField] private Transform player2;
 
-    private void Awake()
-    {
-        player = GameObject.FindWithTag("Player").transform;
-    }
-
-    private void LateUpdate()//LateUpdate is called after Update each frame asi nos aseguramos que actua despues de que el jugador se haya movido
+    private void LateUpdate()
     {
         Vector3 position = transform.position;
-        position.x = Mathf.Max(position.x,player.position.x);//Mathf.Max returns the largest of two or more values.
-        transform.position = position;
-    } 
+        float minX = Mathf.Min(player1.position.x, player2.position.x);
+        if (minX > position.x)
+        {
+            position.x = minX;
+            transform.position = position;
+        }
+    }
 }

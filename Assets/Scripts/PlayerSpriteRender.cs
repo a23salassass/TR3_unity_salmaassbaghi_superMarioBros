@@ -9,12 +9,13 @@ public class PlayerSpriteRender : MonoBehaviour
     public Sprite slide;
     public AnimatedSprite run;
 
-    private void Awake()
-    {
-        movement = GetComponentInParent<PlayerController>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
+private void Awake()
+{
+    movement = GetComponentInParent<PlayerController>();
+    spriteRenderer = GetComponent<SpriteRenderer>();
+    run = GetComponent<AnimatedSprite>(); // Esto es nuevo
 
+}
     private void LateUpdate()
     {
         run.enabled = movement.running;

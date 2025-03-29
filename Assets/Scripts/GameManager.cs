@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
+        // En algún script de inicio, como GameManager o en Awake():
+Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Player"));
+
         if (Instance != null) {
             DestroyImmediate(gameObject);
         } else {
