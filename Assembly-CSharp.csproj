@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\EntityMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\GoalZone.cs" />
+    <Compile Include="Assets\Scripts\PlayerHUD.cs" />
     <Compile Include="Assets\Scripts\SideScrolling.cs" />
     <Compile Include="Assets\Scripts\LoginManager.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement2.cs" />
