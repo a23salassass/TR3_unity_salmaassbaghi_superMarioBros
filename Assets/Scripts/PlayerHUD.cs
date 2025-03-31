@@ -19,6 +19,6 @@ public class PlayerHUD : MonoBehaviour
 
     public void UpdateCoins(int coins)
     {
-        coinText.text = "x " + coins;
+        coinText.text = "" + coins;
     }
 }
