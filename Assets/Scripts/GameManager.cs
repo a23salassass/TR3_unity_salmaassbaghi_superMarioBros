@@ -1,17 +1,23 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-
+using UnityEngine.Networking;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     public PlayerHUD hud;
 
     public static GameManager Instance { get; private set; }
 
+    public int jugador1Id;
+    public int jugador2Id;
+
+    public float partidaStartTime;
+    public int coins = 0;
+
     public int world { get; private set; } = 1;
     public int stage { get; private set; } = 1;
     public int lives { get; private set; } = 3;
-    public int coins { get; private set; } = 0;
 
     private void Awake()
     {
@@ -30,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        partidaStartTime = Time.time;
         TryFindHUD();
         UpdateHUD();
     }
@@ -56,6 +63,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        float temps = Time.time - partidaStartTime;
+        StartCoroutine(SavePartida(jugador1Id, coins, temps));
+        StartCoroutine(SavePartida(jugador2Id, coins, temps));
+
         LogSender.SendLog("Un usuari ha perdut la partida.");
         Debug.Log("Game Over, enviado a mongo");
         SceneManager.LoadScene("TheEnd");
@@ -145,4 +156,43 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+private IEnumerator SavePartida(int jugadorId, int puntuacio, float temps)
+{
+    PartidaData data = new PartidaData
+    {
+        JugadorId = jugadorId,
+        puntuacio = puntuacio,
+        temps = temps
+    };
+
+    string jsonData = JsonUtility.ToJson(data);
+    Debug.Log("📤 Enviant JSON: " + jsonData);
+
+    using (UnityWebRequest request = new UnityWebRequest("http://localhost:4000/api/partides", "POST"))
+    {
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log($"✅ Partida guardada per jugador {jugadorId}");
+        }
+        else
+        {
+            Debug.LogError($"❌ Error guardant la partida: {request.responseCode} - {request.downloadHandler.text}");
+        }
+    }
+}
+[System.Serializable]
+public class PartidaData
+{
+    public int JugadorId;
+    public int puntuacio;
+    public float temps;
+}
+
 }

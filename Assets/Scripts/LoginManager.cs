@@ -1,37 +1,68 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
-using System.Collections;
 
 public class LoginManager : MonoBehaviour
 {
-    public TMP_InputField usernameInput;
-    public TMP_InputField passwordInput;
+    public TMP_InputField usernameInput1;
+    public TMP_InputField passwordInput1;
+    public TMP_InputField usernameInput2;
+    public TMP_InputField passwordInput2;
     public TMP_Text errorMessage;
-    public GameObject loginCanvas;
 
-    private string apiUrl = "http://localhost:4000/api/login"; 
+    private string apiUrl = "http://localhost:4000/api/login";
 
-
-    public void OnLoginButtonPressed()
+    public void OnLoginBothPlayers()
     {
-        string username = usernameInput.text;
-        string password = passwordInput.text;
-
-        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-        {
-            errorMessage.text = "Si us plau, omple tots els camps!";
-            return;
-        }
-
-        StartCoroutine(LoginRequest(username, password));
+        Debug.Log("Login both players clicked");
+        StartCoroutine(LoginBoth());
     }
 
-    private IEnumerator LoginRequest(string username, string password)
+    private IEnumerator LoginBoth()
     {
-        string jsonData = $"{{\"usuari\":\"{username}\",\"contrassenya\":\"{password}\"}}";
+        Debug.Log("Starting login for both players");
+        if (usernameInput1 == null || passwordInput1 == null || usernameInput2 == null || passwordInput2 == null)
+{
+    Debug.LogError("Algún campo de input no está asignado en el inspector.");
+    errorMessage.text = "Falta assignar camps al codi.";
+    yield break;
+}
+        Debug.Log("Starting login for both players");
 
+        string json1 = $"{{\"usuari\":\"{usernameInput1.text}\",\"contrassenya\":\"{passwordInput1.text}\"}}";
+        string json2 = $"{{\"usuari\":\"{usernameInput2.text}\",\"contrassenya\":\"{passwordInput2.text}\"}}";
+
+        int player1Id = -1;
+        int player2Id = -1;
+
+        yield return StartCoroutine(LoginPlayer(json1, id => player1Id = id));
+        yield return StartCoroutine(LoginPlayer(json2, id => player2Id = id));
+
+        if (player1Id > 0 && player2Id > 0)
+        {
+            if (GameManager.Instance == null)
+{
+    Debug.LogError("❌ GameManager.Instance és null. Assegura't que el GameManager és present a l'escena de login.");
+    errorMessage.text = "Error intern: GameManager no trobat.";
+    yield break;
+}
+
+            GameManager.Instance.jugador1Id = player1Id;
+            GameManager.Instance.jugador2Id = player2Id;
+
+            SceneManager.LoadScene("1-1");
+        }
+        else
+        {
+            Debug.Log("Login failed for one or both players");
+            errorMessage.text = "Login fallit per algun jugador";
+        }
+    }
+
+    private IEnumerator LoginPlayer(string jsonData, System.Action<int> onSuccess)
+    {
         using (UnityWebRequest request = new UnityWebRequest(apiUrl, "POST"))
         {
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
@@ -39,42 +70,33 @@ public class LoginManager : MonoBehaviour
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
 
-            errorMessage.text = "Iniciant sessió...";
-            errorMessage.color = Color.yellow;
-
             yield return request.SendWebRequest();
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                Debug.Log("Login Successful: " + request.downloadHandler.text);
-                LogSender.SendLog($"Un usuari ha iniciat sessió {username}.");
-                
-
-    StartCoroutine(LoadSceneAsync("1-1"));
-
+                string jsonResponse = request.downloadHandler.text;
+                int jugadorId = JsonUtility.FromJson<JugadorResponse>(jsonResponse).jugador.id;
+                onSuccess(jugadorId);
             }
-            else {
-                  Debug.Log("FATAL REINA");
-
-                 errorMessage.text = "Error inciant sessió";
-                errorMessage.color = Color.red;
+            else
+            {
+                onSuccess(-1);
             }
         }
     }
 
-private IEnumerator LoadSceneAsync(string sceneName)
-{
-    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-    while (!asyncLoad.isDone)
+    [System.Serializable]
+    public class Jugador
     {
-        yield return null;
+        public int id;
+        public string nom;
+        public string usuari;
     }
-}
 
-    // Método para el botón de registro (si lo tienes)
-    public void OnRegisterButtonPressed()
+    [System.Serializable]
+    public class JugadorResponse
     {
-        // Aquí puedes cargar la escena de registro o mostrar un panel de registro
-        // SceneManager.LoadScene("RegisterScene");
+        public string missatge;
+        public Jugador jugador;
     }
 }
