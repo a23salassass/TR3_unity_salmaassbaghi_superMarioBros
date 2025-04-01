@@ -107,11 +107,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyGravity()
     {
-        // Check if falling
-        bool falling = velocity.y < 0f || !Input.GetButton("Jump");
+        bool falling = velocity.y < 0f || !Input.GetKeyDown(jumpKey);
         float multiplier = falling ? 2f : 1f;
 
-        // Apply gravity and terminal velocity
         velocity.y += gravity * multiplier * Time.deltaTime;
         velocity.y = Mathf.Max(velocity.y, gravity / 2f);
     }

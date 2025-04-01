@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public bool dead => deathAnimation.enabled;
     public bool starpower { get; private set; }
 
-    public float moveSpeed = 5f; // Default
+    public float moveSpeed = 5f; 
     public float coinMultiplier = 1f;
 
     private void Awake()
@@ -51,30 +51,32 @@ public class Player : MonoBehaviour
 
     public void Hit()
     {
-        if (big)
-        {
-            Shrink();
-        }
-        else
-        {
             Death();
         }
+
+
+public void Death()
+{
+    LogSender.SendLog("Un usuari ha mort.");
+    Debug.Log("Un usuari ha mort enviat a MONGODB.");
+
+    if (smallRenderer != null) smallRenderer.enabled = false;
+    if (bigRenderer != null) bigRenderer.enabled = false;
+
+    if (deathAnimation != null)
+    {
+        deathAnimation.enabled = true;
     }
 
-    public void Death()
+    if (GameManager.Instance != null)
     {
-        LogSender.SendLog("Un usuari ha mort.");
-        Debug.Log("Un usuari ha mort enviat a MONGODB.");
-        smallRenderer.enabled = false;
-        bigRenderer.enabled = false;
-        deathAnimation.enabled = true;
         GameManager.Instance.ResetLevel(3f);
     }
-
-    public void Shrink()
+    else
     {
-        // TODO
+        Debug.LogError("GameManager.Instance es null");
     }
+}
 
     public void IncreaseSpeedTemporarily(float multiplier, float duration)
     {

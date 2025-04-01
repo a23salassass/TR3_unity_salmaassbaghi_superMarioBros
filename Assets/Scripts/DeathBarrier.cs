@@ -8,14 +8,8 @@ public class DeathBarrier : MonoBehaviour
         {
 
             Player player = other.GetComponent<Player>();
-            if (player.big)
-            {
-                player.Shrink();
-            }
-            else
-            {
                 player.Death();
-            }
+            
         }
         else{
             Destroy(other.gameObject);

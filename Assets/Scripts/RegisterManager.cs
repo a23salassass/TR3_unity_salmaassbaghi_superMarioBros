@@ -54,7 +54,8 @@ public class Register : MonoBehaviour
 
             GameManager.Instance.jugador1Id = player1Id;
             GameManager.Instance.jugador2Id = player2Id;
-Destroy(gameObject); // Destruye el Register actual para que no persista
+            
+            Destroy(gameObject);
 
             SceneManager.LoadScene("1-1");
         }

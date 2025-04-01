@@ -114,6 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9accafcd118d55f4e8d30325bb3cfea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftKey: 97
+  rightKey: 100
+  jumpKey: 119
   moveSpeed: 8
   maxJumpHeight: 5
   maxJumpTime: 1
@@ -145,6 +148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallRenderer: {fileID: 8180290449133573764}
   bigRenderer: {fileID: 5989931430636697487}
+  moveSpeed: 5
+  coinMultiplier: 1
 --- !u!1 &3240242410919535112
 GameObject:
   m_ObjectHideFlags: 0

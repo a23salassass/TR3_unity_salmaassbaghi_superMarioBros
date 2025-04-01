@@ -4,7 +4,7 @@ using System.Collections;
 
 public class LogSender : MonoBehaviour
 {
-    private static string logEndpoint = "http://localhost:5000/logs";
+    private static string logEndpoint = "http://localhost:4000/api/logs";
 
     public static void SendLog(string message)
     {
