@@ -80,6 +80,14 @@ if (grounded && Input.GetKey(jumpKey) && !jumping)
     {
         Vector2 position = rb.position;
         position += velocity * Time.fixedDeltaTime;
+
+        float cameraLeftEdge = Camera.main.transform.position.x - Camera.main.orthographicSize * Camera.main.aspect;
+
+        if (position.x < cameraLeftEdge)
+        {
+            position.x = cameraLeftEdge; 
+        }
+
         rb.MovePosition(position);
     }
 

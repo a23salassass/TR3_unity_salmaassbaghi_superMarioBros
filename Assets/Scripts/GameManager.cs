@@ -158,6 +158,7 @@ public class GameManager : MonoBehaviour
     }
 private IEnumerator SavePartida(int jugadorId, int puntuacio, float temps)
 {
+    Debug.Log($"Guardando partida para jugador {jugadorId} con puntuación {puntuacio} y tiempo {temps}");
     PartidaData data = new PartidaData
     {
         JugadorId = jugadorId,

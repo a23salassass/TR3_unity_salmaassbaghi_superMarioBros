@@ -17,4 +17,9 @@ public class GoalZone : MonoBehaviour
     {
         SceneManager.LoadScene("LoginScene");
     }
+        public void irARegister()
+    {
+        SceneManager.LoadScene("Register");
+    }
+
 }
