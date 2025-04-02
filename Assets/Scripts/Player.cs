@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LoadStatsFromServer("http://localhost:4000/api/personatges/1"));
+        StartCoroutine(LoadStatsFromServer("http://supermariobros.dam.inspedralbes.cat:25670/api/personatges/1"));
         LogSender.SendLog("Un usuari ha iniciat el joc.");
         Debug.Log("Un usuari ha iniciat el joc enviat a MONGODB.");
     }

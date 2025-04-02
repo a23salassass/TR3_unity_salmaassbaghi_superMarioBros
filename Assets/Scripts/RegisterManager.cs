@@ -14,7 +14,7 @@ public class Register : MonoBehaviour
     public TMP_InputField passwordInput2;
     public TMP_Text errorMessage;
     
-    private string apiUrl = "http://localhost:4000/api/register"; 
+    private string apiUrl = "http://supermariobros.dam.inspedralbes.cat:25670/api/register"; 
     private int defaultCharacterId = 1;
 
     public void OnLoginBothPlayers()

@@ -13,4 +13,8 @@ public class GoalZone : MonoBehaviour
             SceneManager.LoadScene(nextSceneName);
         }
     }
+    public void irALogin()
+    {
+        SceneManager.LoadScene("LoginScene");
+    }
 }

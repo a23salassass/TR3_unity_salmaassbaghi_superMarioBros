@@ -168,7 +168,7 @@ private IEnumerator SavePartida(int jugadorId, int puntuacio, float temps)
     string jsonData = JsonUtility.ToJson(data);
     Debug.Log("📤 Enviant JSON: " + jsonData);
 
-    using (UnityWebRequest request = new UnityWebRequest("http://localhost:4000/api/partides", "POST"))
+    using (UnityWebRequest request = new UnityWebRequest("http://supermariobros.dam.inspedralbes.cat:25670/api/partides", "POST"))
     {
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);

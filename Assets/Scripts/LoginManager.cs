@@ -12,7 +12,7 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField passwordInput2;
     public TMP_Text errorMessage;
 
-    private string apiUrl = "http://localhost:4000/api/login";
+    private string apiUrl = "http://supermariobros.dam.inspedralbes.cat:25670/api/login";
 
     public void OnLoginBothPlayers()
     {

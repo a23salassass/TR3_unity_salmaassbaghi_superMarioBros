@@ -48,6 +48,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(jumpKey))
+{
+    Debug.Log("Salto detectado con: " + jumpKey);
+}
+
         grounded = rb.Raycast(Vector2.down);
 
         float inputAxis = 0f;
@@ -61,11 +66,11 @@ public class PlayerController : MonoBehaviour
             velocity.y = Mathf.Max(velocity.y, 0f);
             jumping = velocity.y > 0f;
 
-            if (Input.GetKeyDown(jumpKey))
-            {
-                velocity.y = jumpForce;
-                jumping = true;
-            }
+if (grounded && Input.GetKey(jumpKey) && !jumping)
+{
+    velocity.y = jumpForce;
+    jumping = true;
+}
         }
 
         ApplyGravity();
