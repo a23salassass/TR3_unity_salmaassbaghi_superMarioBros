@@ -17,20 +17,26 @@ Hit();
         }
     }
 
-    private void Hit()
+private void Hit()
+{
+    SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+    maxHits--;
+
+    if (maxHits == 0)
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        maxHits--;
-        if (maxHits == 0)
-        {
-spriteRenderer.sprite = emptyBlock;
-        }
-        if (item != null)
-        {
-            Instantiate(item, transform.position, Quaternion.identity);
-        }
-        StartCoroutine(Animate());  
+        spriteRenderer.sprite = emptyBlock;
     }
+
+    // Solo instanc
+    // iar el objeto si aún quedan golpes disponibles
+    if (item != null && maxHits >= 0)
+    {
+        Instantiate(item, transform.position, Quaternion.identity);
+    }
+
+    StartCoroutine(Animate());
+}
+
 
     private IEnumerator Animate()
     {
