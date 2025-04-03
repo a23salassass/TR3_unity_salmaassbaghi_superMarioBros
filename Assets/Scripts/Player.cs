@@ -4,6 +4,8 @@ using UnityEngine.Networking;
 
 public class Player : MonoBehaviour
 {
+    public int characterId = 1; 
+
     public DeathAnimation deathAnimation { get; private set; }
 
     public PlayerSpriteRender smallRenderer;
@@ -24,7 +26,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LoadStatsFromServer("http://supermariobros.dam.inspedralbes.cat:25670/api/personatges/1"));
+        string url = $"http://supermariobros.dam.inspedralbes.cat:25670/api/personatges/{characterId}";
+        StartCoroutine(LoadStatsFromServer(url));
         LogSender.SendLog("Un usuari ha iniciat el joc.");
         Debug.Log("Un usuari ha iniciat el joc enviat a MONGODB.");
     }
@@ -51,36 +54,34 @@ public class Player : MonoBehaviour
 
     public void Hit()
     {
-            Death();
+        Death();
+    }
+
+    public void Death()
+    {
+        LogSender.SendLog("Un usuari ha mort.");
+        Debug.Log("Un usuari ha mort enviat a MONGODB.");
+
+        if (smallRenderer != null) smallRenderer.enabled = false;
+        if (bigRenderer != null) bigRenderer.enabled = false;
+
+        if (deathAnimation != null)
+        {
+            deathAnimation.enabled = true;
         }
 
-
-public void Death()
-{
-    LogSender.SendLog("Un usuari ha mort.");
-    Debug.Log("Un usuari ha mort enviat a MONGODB.");
-
-    if (smallRenderer != null) smallRenderer.enabled = false;
-    if (bigRenderer != null) bigRenderer.enabled = false;
-
-    if (deathAnimation != null)
-    {
-        deathAnimation.enabled = true;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ResetLevel(3f);
+        }
+        else
+        {
+            Debug.LogError("GameManager.Instance es null");
+        }
     }
-
-    if (GameManager.Instance != null)
-    {
-        GameManager.Instance.ResetLevel(3f);
-    }
-    else
-    {
-        Debug.LogError("GameManager.Instance es null");
-    }
-}
 
     public void IncreaseSpeedTemporarily(float multiplier, float duration)
     {
-        
         PlayerController controller = GetComponent<PlayerController>();
         if (controller != null)
         {
